@@ -3,13 +3,16 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import {Link as RouterLink} from "react-router-dom";
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import '../App.css'
+import {useNavigate} from "react-router-dom";
+import '../../App.css';
 
 
 function Login(){
+
 
     return (
         <div className="main">
@@ -39,7 +42,7 @@ function Login(){
                                       src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                                       alt="google logo"
                                       sx={{width:"18px",height:"18px"}}/>} variant="outlined" sx={{textTransform:"none",color:"#000000",mt:"10px",borderColor:"#b5acac97",fontWeight:"550"}}fullWidth>Continue With Google</Button>
-             <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",gap:"4px"}}><Typography variant="body2" sx={{mt:"20px"}}> Don't have an account </Typography> <Link sx={{mt:"18px",textDecoration:"none","&:hover":{textDecoration:"underline"}}}> Sign Up</Link> </Box>                               
+             <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",gap:"4px"}}><Typography variant="body2" sx={{mt:"20px"}}> Don't have an account </Typography> <Link component={RouterLink} to='/signup' sx={{mt:"18px",textDecoration:"none",color:"#2a84f3",fontWeight:"700",fontSize:"0.875rem","&:hover":{textDecoration:"underline",}}}> Sign Up</Link> </Box>                               
            </Box>
          </Paper>
         </div>

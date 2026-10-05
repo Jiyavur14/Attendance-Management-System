@@ -1,9 +1,19 @@
-import Login from "./pages/Login.jsx";
+import Login from "./pages/Login/Login.jsx";
+import Signup from "./pages/Login/Signup.jsx";
+import {Routes,Route,Navigate} from 'react-router-dom';
 
 function App(){
     return(
         <div>
-         <Login/>
+
+            <Routes>
+
+                <Route path="/" element={<Navigate to="/login" replace/>}/>
+
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/signup" element={<Signup/>}/>
+            </Routes>
+        
         </div>
     )
 }
