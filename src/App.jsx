@@ -1,6 +1,7 @@
 import Login from "./pages/Login/Login.jsx";
 import Signup from "./pages/Login/Signup.jsx";
 import {Routes,Route,Navigate} from 'react-router-dom';
+import Forgotpassword from "./pages/Login/Forgotpassword.jsx";
 
 function App(){
     return(
@@ -12,6 +13,7 @@ function App(){
 
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
+                <Route path="/forgot-password" element={<Forgotpassword/>}/>
             </Routes>
         
         </div>

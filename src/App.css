@@ -1,6 +1,6 @@
 /*Links color: #2A84F3
-  Button color: #2a84f3
-  Button color with Hover: #216cc8
+  Button Background color: #2a84f3
+  Button Background color with Hover: #216cc8
   Error Box Text Color: #a6151
   Error Box Background Color: #ff00003b 
 */
@@ -12,6 +12,14 @@
 }
 
 #sign-main{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    min-height:100vh;
+    width:100%;
+}
+
+#Fpblock{
     display:flex;
     justify-content: center;
     align-items:center;

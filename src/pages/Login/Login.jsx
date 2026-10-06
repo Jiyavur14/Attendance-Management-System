@@ -17,7 +17,7 @@ function Login(){
     return (
         <div className="main">
          <Paper elevation={4} square={false} sx={{width:"360px",height:"500px"}}>
-           <Box sx={{height:"450px",margin:"25px"}}className="inner-paper">
+           <Box sx={{height:"450px",margin:"25px"}}  className="inner-paper">
             <Typography variant="h5" sx={{fontWeight:"700",}}>Attendance Portal</Typography>
             <Typography variant="body2" sx={{color:"grey",mt:"4px"}}>sign in to simulate door access</Typography>
             <TextField label="Work Email"
@@ -33,7 +33,7 @@ function Login(){
                        variant="outlined"
                        sx={{mt:"20px",'& input::placeholder':{fontSize:"12px"},'& .MuiInputLabel-root':{fontSize:"13px",fontWeight:"700"},'& .MuiInputLabel-root:not(.MuiInputLabel-shrink)':{top:"10%",}}}fullWidth/>
               <Box sx={{display:"flex",justifyContent:"flex-end",mt:"5"}}>
-                <Link underline="hover" sx={{fontSize:"0.875rem",mt:"15px",fontWeight:"700",color:"#2a84f3"}}>Forgot Password</Link>
+                <Link component={RouterLink} to="/forgot-password" underline="hover" sx={{fontSize:"0.875rem",mt:"15px",fontWeight:"700",color:"#2a84f3"}}>Forgot Password?</Link>
               </Box>
               <Button variant="contained" fullWidth sx={{textTransform:"none",fontWeight:"600",mt:"15px",bgcolor:"#2a84f3",'&:hover':{bgcolor:"#216cc8"}}}>Sign In</Button>
               <Button variant="contained" fullWidth sx={{textTransform:"none",mt:"10px",color:"#a61515",bgcolor:'#ff00003b',}}>Invalid Username or Password</Button> 
