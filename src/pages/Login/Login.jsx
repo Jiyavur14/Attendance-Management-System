@@ -35,7 +35,7 @@ function Login(){
     setError("")
 
     const cemail = email.trim();
-    const cpassword = email.trim();
+    const cpassword = password.trim();
 
     if(!cemail || !cpassword){
       setError("Fill the Empty")
@@ -61,7 +61,6 @@ function Login(){
     localStorage.setItem("users",JSON.stringify({
       name:dummy_user.name,
       email:dummy_user.email,
-      password:dummy_user.password,
       role:dummy_user.role,
       token:"dummy_token_123",
     }))
@@ -85,16 +84,19 @@ function Login(){
             <form onSubmit={handlesubmit}>
             <TextField label="Work Email"
                        value={email}
-                       onChange={(e)=>{setEmail(e.target.value)}}
+                       onChange={(e)=>{
+                                     setEmail(e.target.value)
+                                     setError("")}}
                        placeholder="name@company.com"
                        variant="outlined"
                        sx={{mt:"10px",'& input::placeholder':{fontSize:"12px"},'& .MuiInputLabel-root':{fontSize:"13px",fontWeight:"700"},'& .MuiInputLabel-root:not(.MuiInputLabel-shrink)':{top:"10%",}}}
                        size="small"
                        fullWidth />
-                       
+
             <TextField label="Password"
                        value={password}
-                       onChange={(e)=>setPassword(e.target.value)}
+                       onChange={(e)=>{setPassword(e.target.value)
+                                      setError("")}}
                        type ={showpassword ?"text":"password"}
                        placeholder={'\u2022'.repeat(8)}
                        size="small"
@@ -124,7 +126,7 @@ function Login(){
               <Box sx={{display:"flex",justifyContent:"flex-start",mt:"5"}}>
                 <Link component={RouterLink} to="/forgot-password" underline="hover" sx={{fontSize:"0.875rem",fontWeight:"700",mt:"5px",color:"#2a84f3"}}>Forgot Password?</Link>
               </Box>
-              <Button type="submit" variant="contained" fullWidth sx={{textTransform:"none",fontWeight:"600",mt:"15px",bgcolor:"#2a84f3",'&:hover':{bgcolor:"#216cc8"}}}>
+              <Button type="submit" disabled={loading} variant="contained" fullWidth sx={{textTransform:"none",fontWeight:"600",mt:"15px",bgcolor:"#2a84f3",'&:hover':{bgcolor:"#216cc8"}}}>
                 {loading ? <CircularProgress size={22} color="inherit"/>:"Sign In"}</Button>
               </form>
               <Divider sx={{mt:"10px",fontSize:"11px",color:"#786969",}}>Or Continue With</Divider>

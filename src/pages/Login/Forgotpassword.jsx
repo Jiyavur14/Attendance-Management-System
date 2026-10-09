@@ -6,17 +6,47 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router-dom";
 import Divider from "@mui/material/Divider";
+import {useState} from 'react';
 import "../../App.css";
 
 
 function Forgotpassword(){
 
+    const [step,setStep]  = useState(1);
+
+    const [email,setEmail] = useState("");
+    const [otp,setOtp] = useState("");
+
+    const [error,setError] = useState("");
+    const [loading,setLoading] = useState(false);
+    const [showpassword,setShowpassword] = useState(false);
+
+    const GENERATED_OTP = "123456";
+
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+
+        if(!email.trim().includes("@")){
+            setError("Please Enter Valid Email Address");
+            return;
+        }
+        
+        setLoading(true);
+        
+        setTimeout(()=>{
+            setStep((prev)=>prev+1);
+        },1000)
+
+    }
+
     return (<div id="Fpblock">
         <Paper sx={{width:"430px"}}>
-            <Box id="card1" sx={{m:"25px"}}>
+          <form onSubmit={handleSubmit}>{ step===1 && <Box id="card1" sx={{m:"25px"}}>
             <Typography variant="h5" sx={{fontWeight:"700"}}>Reset Password</Typography>
             <Typography variant="body2" sx={{mt:"7px",color:"grey"}}>Enter your work email to receive 6-digit verification code.</Typography>
             <TextField label="Work Email"
+                       value={email}
+                       onChange={(e)=>setEmail(e.target.value)}
                        placeholder="Enter Your Email..."
                        sx={{mt:"10px",'& input::placeholder':{fontSize:"12px"},'& .MuiInputLabel-root':{fontSize:"13px",fontWeight:"600"},'& .MuiInputLabel-root:not(.MuiInputLabel-shrink)':{top:"9%"}}}
                        size="small"
@@ -25,11 +55,11 @@ function Forgotpassword(){
             <Box sx={{display:"flex",justifyContent:"flex-start"}}>
                 <Link component={RouterLink} to="/login" sx={{mt:"9px",fontSize:"0.875rem",fontWeight:"700",color:"#2a84f3",textDecoration:"none",'&:hover':{textDecoration:"underline"}}}>Back to Login</Link>
              </Box>
-            </Box>
+            </Box>}
             
             <Divider></Divider>
 
-            <Box id="card2" sx={{m:"25px"}}>
+            {step===2 && <Box id="card2" sx={{m:"25px"}}>
              <Typography variant="h5" sx={{fontWeight:"700"}}>Verify Code</Typography>
              <Typography variant="body2" sx={{mt:"7px",color:"grey"}}>Code has been sent to email id</Typography>
              <TextField label="OTP Code"
@@ -42,9 +72,9 @@ function Forgotpassword(){
                  <Link component={RouterLink} to="/login" sx={{mt:"9px",fontSize:"0.875rem",fontWeight:"700",color:"#2a84f3",textDecoration:"none",'&:hover':{textDecoration:"underline"}}}>Back to Login</Link>
                 <Link component={RouterLink} sx={{mt:"9px",fontSize:"0.875rem",fontWeight:"700",color:"#2a84f3",textDecoration:"none",'&:hover':{textDecoration:"underline"}}}>Resend OTP</Link>
              </Box>
-            </Box>
+            </Box>}
             <Divider></Divider>
-            <Box id="card3" sx={{m:"25px"}}>
+            {step===3 && <Box id="card3" sx={{m:"25px"}}>
                 <Typography variant="h5" sx={{fontWeight:"700"}}>Set New Password</Typography>
                 <Typography variant="body2" sx={{color:"grey",mt:"10px"}}>Create a Strong Password for your Account</Typography>
                 <TextField label="New Password"
@@ -63,7 +93,8 @@ function Forgotpassword(){
              <Box sx={{display:"flex",justifyContent:"flex-start"}}>
                 <Link component={RouterLink} to="/login" sx={{mt:"9px",fontSize:"0.875rem",fontWeight:"700",color:"#2a84f3",textDecoration:"none",'&:hover':{textDecoration:"underline"}}}>Back to Login</Link>
              </Box>
-            </Box>
+            </Box>}
+            </form>
         </Paper>
     
     </div>)
