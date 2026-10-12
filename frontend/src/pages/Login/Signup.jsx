@@ -39,7 +39,7 @@ function Signup(){
     
     }
 
-   const handleSubmit =(e)=>{
+   const handleSubmit = async (e)=>{
 
       e.preventDefault();
 
@@ -68,10 +68,27 @@ function Signup(){
     }
 
     setLoading(true);
-    setTimeout(()=>{
-      localStorage.setItem("userDB",JSON.stringify);
-     navigate("/login")
-    },1000)}
+  
+    try{
+      const response = await fetch("http://localhost:5000/api/auth/signup",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({name:cfullName,email:cemail,pass:cpassword,cpass:cconfirmPassword})
+      })
+
+      const data = await response.json();
+
+      if(!response.ok){
+        throw new Error(data.message);
+      }
+
+      navigate("/dashboard");
+    }catch(err){
+         setError(err)
+    }finally{
+      setLoading(false)
+    }
+  }
       
     
     return (<div id="sign-main">

@@ -30,7 +30,7 @@ function Login(){
   const [loading,setLoading] = useState(false);
   const [showpassword,setShowpassword] = useState(false);
 
-  const handlesubmit = (e)=>{
+  const handlesubmit = async (e)=>{
     e.preventDefault();
     setError("")
 
@@ -55,25 +55,33 @@ function Login(){
 
     setLoading(true);
 
-    setTimeout(()=>{   
-    if(cemail===dummy_user.email && cpassword===dummy_user.password){
+    try{
+        const response = await fetch("http://localhost:5000/api/auth/login",{
+          method: "POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({email:cemail,password:cpassword})
+        })
 
-    localStorage.setItem("users",JSON.stringify({
-      name:dummy_user.name,
-      email:dummy_user.email,
-      role:dummy_user.role,
-      token:"dummy_token_123",
-    }))
-     
-    navigate("/dashboard");
-   }else{
-    setError("Invalid Username or Password");
-    setLoading(false);
-   }
-    },1000)
- 
+        const data =await response.json();
 
-  }
+        if(!response.ok){
+          throw new Error(data.message);
+        }
+
+        if(response.ok){
+          localStorage.setItem("token",JSON.stringify(data.token));
+          localStorage.setItem("User: ",JSON.stringify(data.user))
+          console.log("User Successfully Logged In!!!");
+          navigate("/dashboard");
+        }
+       
+
+    }catch(err){
+          setError(err.message || "Something went wrong");
+    }finally{
+      setLoading(false);
+    }
+ }
 
     return (
         <div className="main">

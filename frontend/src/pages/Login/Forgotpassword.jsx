@@ -28,10 +28,10 @@ function Forgotpassword(){
     const [loading,setLoading] = useState(false);
     const [showpassword,setShowpassword] = useState(false);
 
-    const GENERATED_OTP = "123456";
 
-    const handlemail = (e)=>{
+    const handlemail = async (e)=>{
         e.preventDefault();
+        setError("");
 
         if(!email.trim().includes("@")){
             setError("Please Enter Valid Email Address");
@@ -40,31 +40,62 @@ function Forgotpassword(){
     
         setLoading(true);
 
-        setTimeout(()=>{
+        try{
+        const res =await fetch("http://localhost:5000/api/auth/forgot-password",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({email}),
+        });
+        const data = await res.json();
+        if(res.ok){
             setStep((prev)=>prev+1);
             setLoading(false);
-        },1000)
+        }else{
+            setError(data.message);
+            setLoading(false);
+        }
+        }catch(err){
+            setError("Failed To reach Server");
+            setLoading(false);
+        }
     }
         
         
-        const handleOtp = (e)=>{
+        const handleOtp = async (e)=>{
             e.preventDefault();
+            setError("")
 
-        if(!otp.trim()||otp.trim().length<6 || otp.trim() !== GENERATED_OTP){
-            setError("Invalid OTP");
+        if(!otp.trim()||otp.trim().length<6){
+            setError("Invalidd OTP");
             return;
         }
-        setLoading(true);
+    
+        try{
+         
+            const res = await fetch("http://localhost:5000/api/auth/verify-otp",{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify({email,otp})
+            })
 
-        setTimeout(()=>{
-            setStep((prev)=>prev+1);
-            setLoading(false);
-        },1000)
+            const data = await res.json();
+
+            if(res.ok){
+                setStep((prev)=>prev+1);
+            }else{
+                setError(data.message);
+            }
+
+        }catch(err){
+           setError("Failed to Reach Server");
+           setLoading(false);
+        }
     }
         
         
-    const handlePassword = (e)=>{
+    const handlePassword = async (e)=>{
         e.preventDefault();
+        setError("");
 
         if(!password.trim()||!cpassword.trim()){
             setError("The Field is Empty");
@@ -81,11 +112,27 @@ function Forgotpassword(){
         
         setLoading(true);
 
-        setTimeout(()=>{
-            setStep((prev)=>prev+1);
-            navigate("/login");
-        },1000)
 
+        try{
+         const res = await fetch("http://localhost:5000/api/auth/reset-password",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({email,otp,password,cpassword})
+         })
+
+         const data = await res.json();
+
+         if(res.ok){
+            console.log("Password Updated, Redirected to Login");
+            setTimeout(()=>{
+                window.location.href = "/login";
+            },2000)
+         }else{
+            setError(data.message)
+         }
+        }catch(err){
+            setError("Failed to reach server");
+        }
         
     }
 
