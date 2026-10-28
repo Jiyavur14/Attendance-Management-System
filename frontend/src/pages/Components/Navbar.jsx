@@ -12,19 +12,22 @@ function Navbar(){
                     </Box>
 
                     <Box sx={{display:"flex",gap:"3px",height:"64px"}}>
-                       <Button sx={{color:"black",fontSize:"15px",fontWeight:"800",textTransform:"none",borderBottom:"3px solid transparent",bgcolor:"white",
-                        '&:hover':{borderBottomColor:"#2a84f3"}}}>Dashboard</Button>
+                       <Button sx={{color:"black",fontSize:"15px",fontWeight:"800",textTransform:"none",borderBottom:"3px solid transparent",bgcolor:"white"
+                        ,'&:hover':{borderBottomColor:"#2a84f3"}}}>Dashboard</Button>
                        <Button sx={{color:"black",fontSize:"15px",fontWeight:"800",textTransform:"none",borderBottom:"3px solid transparent",bgcolor:"white"
                         ,'&:hover':{borderBottomColor:"#2a84f3"}}}>History</Button>
                     </Box>
 
-                    <Box sx={{display:"flex",gap:"4px",alignItems:"center"}}>
-                        <Typography variant="body2" sx={{display:"flex",alignItems:"center",color:"black",fontSize:"12px",fontWeight:"600",p:"7px",borderRadius:"50%",border:"2px solid black",}}>R</Typography>
-                        <Typography variant="body2" sx={{display:"flex",alignItems:"center",color:"black",fontSize:"12px",fontWeight:"600"}}>Ravi(employee)</Typography>
-                        <Button sx={{color:"black",fontSize:"14px",fontWeight:"800"}}>Logout</Button>
+                    <Box sx={{display:"flex",gap:"25px",alignItems:"center"}}>
+                        <Box sx={{display:"flex",gap:"6px"}}>
+                           <Typography variant="body2" sx={{flexShrink:"0",width:"30px",height:"30px",display:"flex",alignItems:"center",justifyContent:"center",color:"black",fontSize:"12px",fontWeight:"600",p:"7px",bgcolor:"#267ce60b",borderRadius:"50%",border:"1px solid #2a84f3b2",}}>R</Typography>
+                           <Typography variant="body2" sx={{display:"flex",alignItems:"center",color:"#616974",fontSize:"12px",fontWeight:"600"}}>Ravi(employee)</Typography>
+                        </Box>
+                        <Button sx={{color:"#616974",fontSize:"14px",fontWeight:"800",border:"1px solid #c7cfddc7",borderRadius:"10px",'&:hover':{bgcolor:"#00a6ff80"}}}>Logout</Button>
                     </Box>
                 </Toolbar>
             </AppBar>
+
     </div>)
 }
 
