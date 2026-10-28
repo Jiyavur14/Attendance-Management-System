@@ -50,7 +50,7 @@ function Dashboard() {
                         <Typography variant="body2" sx={{ color: "#00000078" }}>Simulate Tapping your physical RFID badge at office doors</Typography>
                     </Box>
                     <Box sx={{ display: "flex", gap: "24px", mt: "10px" }}>
-                        <Box sx={{ width: "230px",height: "120px", border: "2px solid #0ff489d0", borderRadius: "12px",display:"flex",flexDirection:"column"}}>
+                        <Box sx={{ width: "230px",height: "120px", border: "2px solid #0ff489d0", borderRadius: "12px",display:"flex",flexDirection:"column",'&:hover':{bgcolor:"#ECFDF5"}}}>
                            <Box sx={{m:"15px",display:"flex",flexDirection:"column",gap:"45px"}}>
                             <Box sx={{display:"flex",gap:"5px",alignItems:"center"}}>
                                 <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",width:"30px",height:"30px",bgcolor:"#ECFDF5",borderRadius:"6px"}}>
@@ -63,7 +63,7 @@ function Dashboard() {
                             </Box>
                             </Box>
                         </Box>
-                        <Box sx={{ width: "230px", height: "120px", border: "2px solid #1c64f5ff", borderRadius: "12px" }}>
+                        <Box sx={{ width: "230px", height: "120px", border: "2px solid #1c64f5ff", borderRadius: "12px",'&:hover':{bgcolor:"#EFF6FF"}}}>
                             <Box sx={{m:"15px",display:"flex",flexDirection:"column",gap:"45px"}}>
                                 <Box sx={{display:"flex",gap:"11px",alignItems:"center"}}>
                                     <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",width:"33px",height:"32px",bgcolor:"#EFF6FF",borderRadius:"6px",color:"#1c64f5ff"}}>
@@ -76,7 +76,7 @@ function Dashboard() {
                                 </Box>
                             </Box>
                         </Box>
-                        <Box sx={{ width: "230px", height: "120px", border: "2px solid #ee0505a2", borderRadius: "12px" }}>
+                        <Box sx={{ width: "230px", height: "120px", border: "2px solid #ee0505a2", borderRadius: "12px",'&:hover':{bgcolor:"#FFF1F2"}}}>
                                <Box sx={{m:"15px",display:"flex",flexDirection:"column",gap:"45px"}}>
                                 <Box sx={{display:"flex",gap:"11px",alignItems:"center"}}>
                                     <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",width:"32px",height:"32px",bgcolor:"#FFF1F2",borderRadius:"6px",color:"#ee0505a2"}}>
