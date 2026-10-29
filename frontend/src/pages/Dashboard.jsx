@@ -1,3 +1,4 @@
+import {useState,useEffect} from 'react';
 import { Typography, Box } from "@mui/material";
 import DoneIcon from '@mui/icons-material/Done';
 import Navbar from "./Components/Navbar.jsx";
@@ -8,17 +9,57 @@ import CloseIcon from '@mui/icons-material/Close';
 
 function Dashboard() {
 
+    const [doors,setDoors] = useState([]);
+    const [attendance,setAttendance] = useState(null);
+    const [loading,setLoading] = useState(false);
+
+
+    const userdata = localStorage.getItem("User");
+    const savedUser = userdata ? JSON.parse(userdata):null;
+    console.log(savedUser);
+
+    const todayDate = new Date().toLocaleDateString("en-GB");
+
+    useEffect(()=>{ 
+        const fetchDashboardData = async ()=>{
+
+            try{
+            const rawToken = localStorage.getItem("token");
+            const token = rawToken ? JSON.parse(rawToken) : null;
+
+            const headers = {
+                    "Content-Type":"application/json",
+                    "Authorization":`Bearer ${token}`
+            }
+
+            const fetchDoors = await fetch("http://localhost:5000/api/doors",{headers});
+            const doordata = await fetchDoors.json();
+            console.log('Available Doors',doordata);
+            setDoors(doordata);
+ 
+            const fetchAttendance = await fetch("http://localhost:5000/api/attendance/today",{headers});
+            const attendanceData = await fetchAttendance.json();
+            console.log('Current Attendance',attendanceData);
+            setAttendance(attendanceData);
+        }catch(err){
+            console.error("Dashboard Fetch Error:",err)
+        }finally{
+            setLoading(false)
+        }
+        }
+        fetchDashboardData();
+    },[])
+
     return (<div id="dashboard">
         <Navbar />
-        <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
-            
+        <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}> 
 
             {/*1. Good Morning Msg Box*/}
 
             <Box id="body" sx={{ mt: "50px", mb: "15px", width: "800px" }}>
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <Typography variant="h5" sx={{ fontWeight: "700" }}>Good Morning, Ravi</Typography>
-                    <Typography>Date 30:01:2026</Typography>
+                    <Typography variant="h5" sx={{ fontWeight: "700" }}>Good Morning, {savedUser?.Name || "User"}</Typography>
+                    <Typography>Date: {todayDate}</Typography>
                 </Box>
             </Box>
 
@@ -59,7 +100,7 @@ function Dashboard() {
                                 <Typography>Main Entrance</Typography>
                             </Box>
                             <Box>
-                                <Typography variant="body2" sx={{fontSize:"12px"}}>Already Checked in</Typography>
+                                <Typography variant="body2" sx={{fontSize:"12px",color:"#10B981"}}>Already Checked in</Typography>
                             </Box>
                             </Box>
                         </Box>
@@ -82,10 +123,10 @@ function Dashboard() {
                                     <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",width:"32px",height:"32px",bgcolor:"#FFF1F2",borderRadius:"6px",color:"#ee0505a2"}}>
                                         <LogoutIcon color="inherit" fontSize="medium"/>
                                     </Box>
-                                    <Typography>Cafeteria</Typography>
+                                    <Typography>Main Exit</Typography>
                                 </Box>
                                 <Box>
-                                    <Typography sx={{fontSize:"12px",color:"#ee0505a2"}}>Start Break</Typography>
+                                    <Typography sx={{fontSize:"12px",color:"#ee0505a2"}}>Check Out</Typography>
                                 </Box>
                             </Box>
                         </Box>

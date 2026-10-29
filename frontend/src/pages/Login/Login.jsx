@@ -15,11 +15,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 import '../../App.css';
 
 
-const dummy_user = {email:"admin@gmail.com",
-                      password:"12345678",
-                      name:"peter",
-                      role:"admin",}
-
 function Login(){
 
   const navigate = useNavigate();
@@ -70,7 +65,7 @@ function Login(){
 
         if(response.ok){
           localStorage.setItem("token",JSON.stringify(data.token));
-          localStorage.setItem("User: ",JSON.stringify(data.user))
+          localStorage.setItem("User",JSON.stringify(data.user))
           console.log("User Successfully Logged In!!!");
           navigate("/dashboard");
         }
